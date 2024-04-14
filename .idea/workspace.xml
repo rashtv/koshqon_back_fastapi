@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43c9405f-106a-4691-9d30-34008cc3a088" name="Changes" comment="" />
+    <list default="true" id="43c9405f-106a-4691-9d30-34008cc3a088" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/api/routes/updater.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/databases/db_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/databases/db_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/router.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +40,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -86,7 +91,7 @@
       <workItem from="1713022351318" duration="4204000" />
       <workItem from="1713027815511" duration="3601000" />
       <workItem from="1713031544898" duration="3592000" />
-      <workItem from="1713106441816" duration="3556000" />
+      <workItem from="1713106441816" duration="5987000" />
     </task>
     <servers />
   </component>

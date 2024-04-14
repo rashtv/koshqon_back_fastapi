@@ -24,7 +24,7 @@ cities_collection = database.get_collection('cities')
 conn = psycopg2.connect(app_config.psql.url)
 
 
-def update_mongo(table_name: str, entity_id: int):
+async def add_data_to_mongo(table_name: str, entity_id: int):
     collection = database.get_collection(table_name)
     cur = conn.cursor()
     try:
@@ -50,7 +50,7 @@ def update_mongo(table_name: str, entity_id: int):
         data = dict()
         for key, val in zip(column_names, row): # noqa
             data[key] = val
-        collection.insert_one(**data)
+        await collection.insert_one(**data)
 
     except psycopg2.Error as e:
         print(f'Tried to get from {table_name} row with id = {entity_id}')
