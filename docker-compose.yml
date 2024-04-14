@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: kq_fastapi_prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./src:/kq_back/src"
+      - "./logs:/var/log"
+    depends_on:
+      - mongo
+    env_file:
+      - .env
+    environment:
+      - MONGO_HOST=mongo
+
+  mongo:
+    container_name: kq_mongo_prod
+    image: mongo:7.0.8
+    restart: unless-stopped
+    volumes:
+      - "./mongo:/data/db"
+    ports:
+      - "27017:27017"

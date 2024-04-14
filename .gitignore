@@ -1,0 +1,14 @@
+# python cache
+__pycache__/
+
+# mongo
+mongo/
+
+# logs
+logs/
+
+# virtual environment
+venv/
+
+# env file
+.env
