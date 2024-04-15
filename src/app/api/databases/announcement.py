@@ -39,7 +39,9 @@ async def retrieve_announcement_type(announcement_type_id: int):
 
 
 async def retrieve_announcement_images(announcement_id: int):
-    announcement_images = await announcements_images_collection.find({'announcements_id': announcement_id})
+    announcement_images = await announcements_images_collection.find(
+        {'announcements_id': announcement_id}
+    ).to_list(length=None)
     if announcement_images:
         return announcement_images
 
