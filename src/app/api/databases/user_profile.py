@@ -8,6 +8,7 @@ from api.databases.announcement import (
 )
 from api.databases.db_client import (
     profiles_collection,
+    profiles_images_collection,
     characteristics_collection,
     connections_collection,
     favorites_collection,
@@ -61,12 +62,20 @@ async def retrieve_user_characteristics(profile_id: int):
         return user_characteristics_helper(user_characteristics)
 
 
+async def retrieve_profile_image(profile_id: int):
+    profile_image = await profiles_images_collection.find_one({'profile_id': profile_id})
+    if profile_image:
+        return profile_image
+
+
 async def retrieve_user_profiles():
     user_profiles = []
     async for user_profile in profiles_collection.find():
         user_characteristics = await retrieve_user_characteristics(user_profile.get('_id'))
+        profile_image = await retrieve_profile_image(user_profile.get('_id'))
         user_profile = user_profile_helper(user_profile)
         user_profile['characteristics'] = user_characteristics
+        user_profile['image'] = profile_image
         user_profiles.append(user_profile)
     return user_profiles
 
@@ -75,8 +84,10 @@ async def retrieve_user_profile(profile_id: int):
     user_profile = await profiles_collection.find_one({'_id': profile_id})
     if user_profile:
         user_characteristics = await retrieve_user_characteristics(profile_id)
+        profile_image = await retrieve_profile_image(user_profile.get('_id'))
         user_profile = user_profile_helper(user_profile)
         user_profile['characteristics'] = user_characteristics
+        user_profile['image'] = profile_image
         return user_profile
 
 
