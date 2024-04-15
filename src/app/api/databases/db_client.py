@@ -31,11 +31,12 @@ async def add_data_to_mongo(table_name: str, entity_id: int):
         cur.execute(f"""
             SELECT column_name
             FROM information_schema.columns
-            WHERE table_schema = 'public'  -- or your schema name
-            AND {table_name} = 'your_table_name';
+            WHERE table_schema = 'public'
+            AND table_name = '{table_name}';
         """)
-        column_names = cur.fetchone()
-
+        columns = cur.fetchall()
+        column_names = [col[0] for col in columns]
+        column_names[0] = '_id'
     except psycopg2.Error as e:
         print('Probably this table does not exist.')
         print(dir(e))
@@ -46,7 +47,7 @@ async def add_data_to_mongo(table_name: str, entity_id: int):
             f"FROM {table_name} "
             f"WHERE id = {entity_id}"
         )
-        row = cur.fetchone()
+        row = cur.fetchall()
         data = dict()
         for key, val in zip(column_names, row): # noqa
             data[key] = val
