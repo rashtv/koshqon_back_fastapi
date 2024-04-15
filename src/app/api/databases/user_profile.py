@@ -7,9 +7,9 @@ from api.databases.announcement import (
     announcement_helper
 )
 from api.databases.db_client import (
-    user_profiles_collection,
-    user_characteristics_collection,
-    friends_collection,
+    profiles_collection,
+    characteristics_collection,
+    connections_collection,
     favorites_collection,
     announcements_collection,
 )
@@ -56,14 +56,14 @@ def connection_helper(connection) -> dict:
 
 
 async def retrieve_user_characteristics(profile_id: int):
-    user_characteristics = await user_characteristics_collection.find_one({'profile_id': profile_id})
+    user_characteristics = await characteristics_collection.find_one({'profile_id': profile_id})
     if user_characteristics:
         return user_characteristics_helper(user_characteristics)
 
 
 async def retrieve_user_profiles():
     user_profiles = []
-    async for user_profile in user_profiles_collection.find():
+    async for user_profile in profiles_collection.find():
         user_characteristics = await retrieve_user_characteristics(user_profile.get('_id'))
         user_profile = user_profile_helper(user_profile)
         user_profile['characteristics'] = user_characteristics
@@ -72,7 +72,7 @@ async def retrieve_user_profiles():
 
 
 async def retrieve_user_profile(profile_id: int):
-    user_profile = await user_profiles_collection.find_one({'_id': profile_id})
+    user_profile = await profiles_collection.find_one({'_id': profile_id})
     if user_profile:
         user_characteristics = await retrieve_user_characteristics(profile_id)
         user_profile = user_profile_helper(user_profile)
@@ -82,7 +82,7 @@ async def retrieve_user_profile(profile_id: int):
 
 async def retrieve_friends(profile_id: int) -> List:
     friends = []
-    async for data in friends_collection.find({'profile_1': profile_id}):
+    async for data in connections_collection.find({'profile_1': profile_id}):
         friend = await retrieve_user_profile(data.get('profile_2'))
         friends.append(friend)
     return friends

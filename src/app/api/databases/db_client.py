@@ -9,13 +9,17 @@ client = motor.motor_asyncio.AsyncIOMotorClient(app_config.mongo.details)
 
 database = client.get_database('koshqon')
 
-announcements_collection = database.get_collection('announcements')
 announcement_types_collection = database.get_collection('announcement_type')
+announcements_collection = database.get_collection('announcements')
+announcements_images_collection = database.get_collection('announcements_images')
+characteristics_collection = database.get_collection('characteristics')
+connections_collection = database.get_collection('connections')
+errors_collection = database.get_collection('errors')
 favorites_collection = database.get_collection('favorites')
-user_profiles_collection = database.get_collection('profiles')
-user_characteristics_collection = database.get_collection('characteristics')
+profiles_collection = database.get_collection('profiles')
+profiles_images_collection = database.get_collection('profiles_images')
+status_collection = database.get_collection('status_images')
 users_collection = database.get_collection('users')
-friends_collection = database.get_collection('connections')
 
 # workflow collections
 cities_collection = database.get_collection('cities')
@@ -58,4 +62,3 @@ async def add_data_to_mongo(table_name: str, entity_id: int):
         print(dir(e))
     finally:
         cur.close()
-        conn.close()
