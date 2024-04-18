@@ -29,6 +29,8 @@ services:
       - "./mongo:/data/db"
     ports:
       - "27017:27017"
+    networks:
+      koshqon:
 
 networks:
   koshqon:
