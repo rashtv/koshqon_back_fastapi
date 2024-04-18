@@ -18,7 +18,7 @@ errors_collection = database.get_collection('errors')
 favorites_collection = database.get_collection('favorites')
 profiles_collection = database.get_collection('profiles')
 profiles_images_collection = database.get_collection('profiles_images')
-status_collection = database.get_collection('status_images')
+status_collection = database.get_collection('status')
 users_collection = database.get_collection('users')
 
 # workflow collections

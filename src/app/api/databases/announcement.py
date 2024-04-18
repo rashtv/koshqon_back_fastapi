@@ -18,9 +18,11 @@ def announcement_helper(announcement) -> dict:
         "announcement_type": announcement["announcement_type"],
         "description": announcement["description"],
         "profile_id": announcement["profile_id"],
-        "created_at": datetime.strptime(announcement["created_at"], "%Y-%m-%d %H:%M:%S.%f"),
+        # "created_at": datetime.strptime(announcement["created_at"], "%Y-%m-%d %H:%M:%S.%f"),
+        "created_at": str(announcement["created_at"]),
         "created_by": announcement["created_by"],
-        "updated_at": datetime.strptime(announcement["updated_at"], "%Y-%m-%d %H:%M:%S.%f"),
+        # "updated_at": datetime.strptime(announcement["updated_at"], "%Y-%m-%d %H:%M:%S.%f"),
+        "updated_at": str(announcement["updated_at"]),
         "updated_by": announcement["updated_by"],
     }
 

@@ -40,7 +40,7 @@ async def get_user_profiles():
 
 
 @router.get(
-    path='/users_profile/{user_profile_id:int}',
+    path='/user_profiles/{user_profile_id:int}',
     summary='Get the user profile',
     operation_id='UserProfileDetail',
     description='Returns the concrete user profile using ID parameter.',
@@ -63,7 +63,7 @@ async def get_user_profile(user_profile_id):
 
 
 @router.get(
-    path='/users/{user_profile_id:int}/announcements',
+    path='/user_profiles/{user_profile_id:int}/announcements',
     summary='Get user announcements',
     operation_id='UserAnnouncements',
     description='Returns announcements of the user',
@@ -97,7 +97,7 @@ async def get_user_friends(user_profile_id: int):
 
 
 @router.get(
-    path='/users/{user_profile_id:int}/favorites',
+    path='/user_profiles/{user_profile_id:int}/favorites',
     summary='Get user favorites',
     operation_id='FavoriteAnnouncements',
     description='Returns favorite announcements of user',

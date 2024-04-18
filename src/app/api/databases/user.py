@@ -13,9 +13,11 @@ def user_helper(user) -> dict:
         'phone': user['phone'],
         'active': user['active'],
         'profile_id': user['profile_id'],
-        'created_at': datetime.strptime(user['created_at'], '%Y-%m-%d %H:%M:%S.%f'),
+        # 'created_at': datetime.strptime(user['created_at'], '%Y-%m-%d %H:%M:%S.%f'),
+        'created_at': str(user['created_at']),
         'created_by': user['created_by'],
-        'updated_at': datetime.strptime(user['updated_at'], '%Y-%m-%d %H:%M:%S.%f'),
+        # 'updated_at': datetime.strptime(user['updated_at'], '%Y-%m-%d %H:%M:%S.%f'),
+        'updated_at': str(user['updated_at']),
         'updated_by': user['updated_by'],
     }
 
