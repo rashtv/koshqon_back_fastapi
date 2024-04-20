@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   app:
-    container_name: kq_fastapi_prod
+    container_name: fastapi
     build:
       context: .
       dockerfile: Dockerfile
@@ -22,7 +22,7 @@ services:
       koshqon:
 
   mongo:
-    container_name: kq_mongo_prod
+    container_name: mongo
     image: mongo:7.0.8
     restart: unless-stopped
     volumes:
@@ -31,6 +31,42 @@ services:
       - "27017:27017"
     networks:
       koshqon:
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus_data/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      koshqon:
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      koshqon:
+
+volumes:
+  prometheus_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./prometheus_data
+  grafana_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./grafana_data
 
 networks:
   koshqon:

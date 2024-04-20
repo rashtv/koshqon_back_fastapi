@@ -2,6 +2,7 @@ import uvicorn
 from loguru import logger
 from decouple import config
 from fastapi import FastAPI, Request, Depends
+from prometheus_fastapi_instrumentator import Instrumentator, PrometheusFastApiInstrumentator
 from starlette.middleware.cors import CORSMiddleware
 
 from api.router import api_router
@@ -29,8 +30,11 @@ app = FastAPI(
     docs_url='/docs',
 )
 
+instrumentator: PrometheusFastApiInstrumentator = Instrumentator()
+instrumentator.instrument(app).expose(app)
+
 app.add_middleware(
-    middleware_class=CORSMiddleware,
+    middleware_class=CORSMiddleware, # noqa
     allow_origins=app_config.api.allowed_hosts or ['*'],
     allow_credentials=True,
     allow_methods=['*'],
